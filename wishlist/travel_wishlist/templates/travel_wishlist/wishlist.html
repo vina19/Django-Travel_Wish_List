@@ -13,9 +13,13 @@
 
     <div class="wishlist-place">
 
-        <span class="place-name">{{ place.name }}</span>
+        <span class="place-name-{{ place.pk }}" class="place-name">
+            <a href="{% url 'place_details' place_pk=place.pk %}">
+                {{ place.name }}
+            </a>
+        </span>
 
-        <form class="visited-form" methods="POST" action="{% url 'place_was_visited' %}"></form>
+        <form class="visited-form" methods="POST" action="{% url 'place_was_visited' %}">
             {% csrf_token %}
             <input type="hidden" name="pk" value="{{ place.pk }}">
             <button type="submit">Visited!</button>
